@@ -1,5 +1,6 @@
 [project]
 title = gazhua
+dependencies = https://github.com/britzl/defold-input/archive/master.zip
 
 [bootstrap]
 main_collection = /main/main.collectionc

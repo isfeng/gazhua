@@ -2,15 +2,25 @@ local gazhuas = {}
 
 function init(self)
     msg.post(".", "acquire_input_focus")
-    self.speed = 100
 end
 
 function on_input(self, action_id, action)
+    -- print('main.script on_input')
     if action_id == hash("touch") and action.pressed then
         print("Touch!")
         local ga_id = factory.create("/go1#factory_gazhua", vmath.vector3(math.random(640), 0, 0))
         table.insert(gazhuas, ga_id)
     end
+end
+
+function on_message(self, message_id, message, sender)
+    -- print("main.script" .. message_id)
+    if message_id == hash("pressed") then
+        -- go.delete(message.id)
+    end
+    
+    -- Add message-handling code here
+    -- Remove this function if not needed
 end
 
 function update(self, dt)
