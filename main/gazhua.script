@@ -22,7 +22,7 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-    if message_id == hash("pressed") then
+    if message_id == hash("released") then
         go.delete()
     end
     -- Add message-handling code here
