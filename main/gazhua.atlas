@@ -1,3 +1,6 @@
+images {
+  image: "/assets/gazhua_images/cock-die-300.png"
+}
 animations {
   id: "crawl"
   images {

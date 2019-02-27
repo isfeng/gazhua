@@ -1,6 +1,6 @@
 [project]
 title = gazhua
-dependencies = https://github.com/isfeng/defold-input/archive/master.zip
+dependencies = https://github.com/isfeng/defold-input/archive/master.zip,https://github.com/britzl/blip/archive/master.zip
 
 [bootstrap]
 main_collection = /main/main.collectionc

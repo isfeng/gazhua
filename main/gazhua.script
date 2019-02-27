@@ -1,42 +1,56 @@
+local seed = 1234
+
 function init(self)
-    -- Add initialization code here
-    -- Remove this function if not needed
-    self.speed = 100
+	-- Add initialization code here
+	-- Remove this function if not needed
+	self.speed = 100
 end
 
 function final(self)
-    -- Add finalization code here
-    -- Remove this function if not needed
+	-- Add finalization code here
+	-- Remove this function if not needed
 end
 
 function update(self, dt)
-    local g = go.get_position()
-    g.y = g.y + self.speed * dt
-    local r = math.random()
-    if(r > 0.6) then
-        g.x = g.x + r
-    else
-        g.x = g.x - r
-    end
-    go.set_position(g)
+	if self.status ~= "dead" then
+		local g = go.get_position()
+		g.y = g.y + self.speed * dt
+		local r = math.random()
+		if(r > 0.6) then
+			g.x = g.x + r
+		else
+			g.x = g.x - r
+		end
+		go.set_position(g)
+	end
+	--msg.post("#sprite", "play_animation", { id = hash("cock-die-300") })
+end
+
+function animate_complete(self, url, property)
+	go.delete()
 end
 
 function on_message(self, message_id, message, sender)
-    if message_id == hash("released") then
-        go.delete()
-    end
-    -- Add message-handling code here
-    -- Remove this function if not needed
+	if message_id == hash("released") then
+		--go.delete()
+		self.status = "dead"
+		msg.post("/go#sound", "play_sound") 
+		go.set(".", "position.z", math.random()*-1)
+		msg.post("#sprite", "play_animation", {id = hash("cock-die-300")})
+		go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1, 0, animate_complete) 
+	end
+	-- Add message-handling code here
+	-- Remove this function if not needed
 end
 
 function on_input(self, action_id, action)
-    print("gazha.script on_input" .. action_id)
-    --println(action_id)
-    -- Add input-handling code here
-    -- Remove this function if not needed
+	print("gazha.script on_input" .. action_id)
+	--println(action_id)
+	-- Add input-handling code here
+	-- Remove this function if not needed
 end
 
 function on_reload(self)
-    -- Add reload-handling code here
-    -- Remove this function if not needed
+	-- Add reload-handling code here
+	-- Remove this function if not needed
 end
